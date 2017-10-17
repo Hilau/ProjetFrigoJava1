@@ -18,7 +18,7 @@ public class FridgeControler extends AbstractControler implements SerialPortEven
 	private SerialPort serialPort;
 	/** The port we're normally going to use. */
 	private static final String PORT_NAMES[] = {
-			"COM4", // Windows
+			"COM3", // Windows
 	};
 	private BufferedReader input;
 	/** The output stream to the port */
@@ -34,7 +34,7 @@ public class FridgeControler extends AbstractControler implements SerialPortEven
 		FridgeView view = new FridgeView(this);
 		this.model.addObserver(view);
 
-		/*this.initialize();
+		this.initialize();
 		Thread t=new Thread() {
 			public void run() {
 				//the following line will keep this app alive for 1000 seconds,
@@ -42,7 +42,7 @@ public class FridgeControler extends AbstractControler implements SerialPortEven
 				try {Thread.sleep(1000000);} catch (InterruptedException ie) {}
 			}
 		};
-		t.start();*/
+		t.start();
 
 	}
 
