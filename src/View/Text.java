@@ -15,35 +15,38 @@ public class Text extends JPanel implements Component {
 
 	private Color color = Color.white;
 
-	private boolean isFilled = true;
-
 	/**
-	 * 
 	 * @param text
 	 * @param x
 	 * @param y
 	 */
-	public Text(String text, int x, int y, boolean makeCircle)
-	{
+	public Text(String text, int x, int y)
+    {
         this.text = text;
         this.x = x;
         this.y = y;
-        this.makeCircle = makeCircle;
         this.setSize(275, 600);
-	}
+    }
 
-	/**
-	 *
-	 * @param makeCircle
-	 * @param x
-	 * @param y
-	 */
-	public Text(boolean makeCircle, int x, int y)
-	{
-		this.makeCircle = makeCircle;
-		this.x = x;
-		this.y = y;
-	}
+    /**
+     * @param x
+     * @param y
+     */
+    public Text(int x, int y)
+    {
+        this.x = x;
+        this.y = y;
+        this.makeCircle = true;
+        this.setSize(275, 600);
+    }
+
+    /**
+     * @param text
+     */
+    public void setText(String text)
+    {
+        this.text = text;
+    }
 
     /**
      *

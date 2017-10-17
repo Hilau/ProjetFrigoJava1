@@ -13,6 +13,8 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.util.Enumeration;
 
+import static java.lang.Thread.sleep;
+
 public class FridgeControler extends AbstractControler implements SerialPortEventListener {
 
 	private SerialPort serialPort;
@@ -31,10 +33,8 @@ public class FridgeControler extends AbstractControler implements SerialPortEven
 	public FridgeControler()
 	{
 		this.model = new FridgeModel();
-		FridgeView view = new FridgeView(this);
-		this.model.addObserver(view);
 
-		this.initialize();
+		/*this.initialize();
 		Thread t=new Thread() {
 			public void run() {
 				//the following line will keep this app alive for 1000 seconds,
@@ -42,7 +42,7 @@ public class FridgeControler extends AbstractControler implements SerialPortEven
 				try {Thread.sleep(1000000);} catch (InterruptedException ie) {}
 			}
 		};
-		t.start();
+		t.start();*/
 
 	}
 

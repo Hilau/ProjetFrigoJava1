@@ -2,20 +2,22 @@ package View;
 
 import Controler.AbstractControler;
 
+import Model.Model;
+
 import javax.swing.*;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-public class FridgeView extends JFrame implements Observer {
-
+public class FridgeView extends JFrame implements Observer
+{
 	public JPanel componentContainer ;
-	public JPanel componentInternalTemperature;
-	public JPanel componentExternalTemperature;
-	public JPanel componentHygrometry;
+	public Text componentInternalTemperature;
+	public Text componentExternalTemperature;
+	public Text componentHygrometry;
 	public JPanel componentUpdateTemperature;
 	public JPanel componentStateDoor;
-	public Button componentBtnOnOff;
+	public JButton componentBtnOnOff;
 	public JButton componentBtnOpenDoor;
 
 	private AbstractControler controler;
@@ -43,12 +45,12 @@ public class FridgeView extends JFrame implements Observer {
 
 	private void initComponent()
     {
-        this.componentInternalTemperature = new Text("Internal temperature : 20°C", 20, 40, false);
-        this.componentExternalTemperature = new Text("External temperature : 25°C", 20,70, false);
-        this.componentHygrometry = new Text("Hygrometry : 30%", 20, 100, false);
+        this.componentInternalTemperature = new Text("Internal temperature : 20°C", 20, 40);
+        this.componentExternalTemperature = new Text("External temperature : 25°C", 20,70);
+        this.componentHygrometry = new Text("Hygrometry : 30%", 20, 100);
         this.componentBtnOnOff = new Button("On / Off", 425, 20);
         this.componentBtnOpenDoor = new Button("<html>Open / close <br /> the door</html>", 425, 75);
-        this.componentStateDoor = new Text("", 20, 150, true);
+        this.componentStateDoor = new Text(20, 150 );
 
         this.componentContainer = new JPanel();
         this.componentContainer.setLayout(null);
@@ -61,17 +63,21 @@ public class FridgeView extends JFrame implements Observer {
         this.setContentPane(this.componentContainer);
     }
 
-	/**
-	 * 
-	 * @param typeComponent
-	 */
-	private void addComponent(String typeComponent)
-	{
-
-	}
-
-    public void update(String str)
+    public void update(String str, Model model)
     {
+        switch(str)
+        {
+            case "internalTemperature":
+                this.componentInternalTemperature.setText("Internal temperature : " + model.getInternalTemperature());
+                break;
 
+            case "externalTemperature":
+                this.componentExternalTemperature.setText("External temperature : " + model.getExternalTemperature());
+                break;
+
+            case "hygrometry":
+                this.componentHygrometry.setText("Hygrometry : " + model.getHygrometry());
+                break;
+        }
     }
 }

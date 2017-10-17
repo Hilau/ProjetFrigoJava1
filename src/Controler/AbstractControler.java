@@ -1,10 +1,10 @@
 package Controler;
 
-import Model.AbstractModel;
+import Model.Model;
 
 public abstract class AbstractControler {
 
-	protected AbstractModel model;
+	public Model model;
 
 	public abstract void toggleDoor();
 
