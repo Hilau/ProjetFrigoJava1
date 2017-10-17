@@ -32,7 +32,9 @@ public class FridgeControler extends AbstractControler implements SerialPortEven
 	{
 		this.model = new FridgeModel();
 		FridgeView view = new FridgeView(this);
-		this.initialize();
+		this.model.addObserver(view);
+
+		/*this.initialize();
 		Thread t=new Thread() {
 			public void run() {
 				//the following line will keep this app alive for 1000 seconds,
@@ -40,7 +42,8 @@ public class FridgeControler extends AbstractControler implements SerialPortEven
 				try {Thread.sleep(1000000);} catch (InterruptedException ie) {}
 			}
 		};
-		t.start();
+		t.start();*/
+
 	}
 
 	public void toggleDoor()

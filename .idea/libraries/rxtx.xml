@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="rxtx">
+    <CLASSES />
+    <JAVADOC />
+    <NATIVE>
+      <root url="file://$PROJECT_DIR$/../rxtx" />
+      <root url="file://$PROJECT_DIR$/../rxtx" />
+    </NATIVE>
+    <SOURCES />
+  </library>
+</component>

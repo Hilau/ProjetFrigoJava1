@@ -3,6 +3,9 @@ package View;
 import Controler.AbstractControler;
 
 import javax.swing.*;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 public class FridgeView extends JFrame implements Observer {
 
@@ -17,6 +20,8 @@ public class FridgeView extends JFrame implements Observer {
 
 	private AbstractControler controler;
 
+    private ScheduledExecutorService service = Executors.newSingleThreadScheduledExecutor();
+
 	public FridgeView(AbstractControler controler)
 	{
         this.setTitle("Graphic Interface");
@@ -26,20 +31,24 @@ public class FridgeView extends JFrame implements Observer {
         this.setResizable(false);
         this.initComponent();
         this.controler = controler;
-        this.setLayout(null);
         this.setVisible(true);
+        service.scheduleAtFixedRate(new Runnable()
+        {
+            public void run()
+            {
+                componentContainer.repaint();
+            }
+        }, 0, 1, TimeUnit.SECONDS);
 	}
 
 	private void initComponent()
     {
-        this.componentInternalTemperature = new Text("Internal temperature : 20°C", 20, 40);
-        this.componentExternalTemperature = new Text("External temperature : 25°C", 20,70);
-        this.componentHygrometry = new Text("Hygrometry : 30%", 20, 100);
+        this.componentInternalTemperature = new Text("Internal temperature : 20°C", 20, 40, false);
+        this.componentExternalTemperature = new Text("External temperature : 25°C", 20,70, false);
+        this.componentHygrometry = new Text("Hygrometry : 30%", 20, 100, false);
         this.componentBtnOnOff = new Button("On / Off", 425, 20);
         this.componentBtnOpenDoor = new Button("<html>Open / close <br /> the door</html>", 425, 75);
-        //this.componentStateDoor = new Led();
-
-        // LED ne s'affiche pas
+        this.componentStateDoor = new Text("", 20, 150, true);
 
         this.componentContainer = new JPanel();
         this.componentContainer.setLayout(null);
@@ -48,7 +57,7 @@ public class FridgeView extends JFrame implements Observer {
         this.componentContainer.add(this.componentHygrometry);
         this.componentContainer.add(this.componentBtnOnOff);
         this.componentContainer.add(this.componentBtnOpenDoor);
-        //this.componentContainer.add(this.componentStateDoor);
+        this.componentContainer.add(this.componentStateDoor);
         this.setContentPane(this.componentContainer);
     }
 

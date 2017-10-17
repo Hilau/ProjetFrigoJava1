@@ -10,5 +10,7 @@
     <orderEntry type="library" name="bin" level="project" />
     <orderEntry type="library" name="RXTXcomm" level="project" />
     <orderEntry type="library" name="bin1" level="project" />
+    <orderEntry type="library" name="RXTXcomm1" level="project" />
+    <orderEntry type="library" name="rxtx" level="project" />
   </component>
 </module>
