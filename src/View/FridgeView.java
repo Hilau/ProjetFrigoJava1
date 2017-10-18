@@ -16,7 +16,7 @@ public class FridgeView extends JFrame implements Observer
 	public Text componentExternalTemperature;
 	public Text componentHygrometry;
 	public JPanel componentUpdateTemperature;
-	public JPanel componentStateDoor;
+	public Text componentStateDoor;
 	public JButton componentBtnOnOff;
 	public JButton componentBtnOpenDoor;
 
@@ -24,6 +24,14 @@ public class FridgeView extends JFrame implements Observer
 
     private ScheduledExecutorService service = Executors.newSingleThreadScheduledExecutor();
 
+    private static final int MINIMUM = 0;
+
+    private static final int MAXIMUM = 100;
+
+    /**
+     * Constructor of the class which initialize and create a new frame
+     * @param controler
+     */
 	public FridgeView(AbstractControler controler)
 	{
         this.setTitle("Graphic Interface");
@@ -43,6 +51,9 @@ public class FridgeView extends JFrame implements Observer
         }, 0, 1, TimeUnit.SECONDS);
 	}
 
+    /**
+     * This method is used to initialize component on the frame
+     */
 	private void initComponent()
     {
         this.componentInternalTemperature = new Text("Internal temperature : 20°C", 20, 40);
@@ -50,7 +61,7 @@ public class FridgeView extends JFrame implements Observer
         this.componentHygrometry = new Text("Hygrometry : 30%", 20, 100);
         this.componentBtnOnOff = new Button("On / Off", 425, 20);
         this.componentBtnOpenDoor = new Button("<html>Open / close <br /> the door</html>", 425, 75);
-        this.componentStateDoor = new Text(20, 150 );
+        this.componentStateDoor = new Text(20, 150);
 
         this.componentContainer = new JPanel();
         this.componentContainer.setLayout(null);
@@ -63,20 +74,30 @@ public class FridgeView extends JFrame implements Observer
         this.setContentPane(this.componentContainer);
     }
 
+
+    /**
+     * This method is used with the design pattern observer and will be call each time a value is updated
+     * @param str
+     * @param model
+     */
     public void update(String str, Model model)
     {
         switch(str)
         {
             case "internalTemperature":
-                this.componentInternalTemperature.setText("Internal temperature : " + model.getInternalTemperature());
+                this.componentInternalTemperature.setText("Internal temperature : " + model.getInternalTemperature() + " °C");
                 break;
 
             case "externalTemperature":
-                this.componentExternalTemperature.setText("External temperature : " + model.getExternalTemperature());
+                this.componentExternalTemperature.setText("External temperature : " + model.getExternalTemperature() + " °C");
                 break;
 
             case "hygrometry":
-                this.componentHygrometry.setText("Hygrometry : " + model.getHygrometry());
+                this.componentHygrometry.setText("Hygrometry : " + model.getHygrometry() + "%");
+                break;
+
+            case "stateDoor":
+                this.componentStateDoor.setIsDoorOpened(model.getStateDoor());
                 break;
         }
     }

@@ -15,6 +15,10 @@ public class Text extends JPanel implements Component {
 
 	private Color color = Color.white;
 
+	private Boolean isDoorOpened = false;
+
+	private Boolean isFilled = true;
+
 	/**
 	 * @param text
 	 * @param x
@@ -49,30 +53,38 @@ public class Text extends JPanel implements Component {
     }
 
     /**
-     *
+     * @param isDoorOpened
+     */
+    public void setIsDoorOpened(boolean isDoorOpened)
+    {
+        this.isDoorOpened = isDoorOpened;
+    }
+
+    /**
+     * This method is called when an instance of this class is created (as a constructor)
      * @param g
      */
     public void paintComponent(Graphics g)
     {
     	if(this.makeCircle)
 		{
-			Boolean isDoorOpened = true;
-
-			if(isDoorOpened)
+			if(this.isDoorOpened)
 			{
 				g.setColor(Color.red);
 				g.drawOval(15, 150, 75, 75);
 
-				if(color.equals(Color.red))
+				if(this.isFilled)
 				{
 					color = Color.white;
 					g.setColor(color);
+					this.isFilled = false;
 				}
 
-				else if(color.equals(Color.white))
+				else if(!this.isFilled)
 				{
 					color = Color.red;
 					g.setColor(color);
+					this.isFilled = true;
 				}
 
 				g.fillOval(15, 150, 75, 75);

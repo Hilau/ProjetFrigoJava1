@@ -9,7 +9,7 @@ public class Button extends JButton implements MouseListener, Component {
 	private String label;
 
 	/**
-	 * 
+	 * Constructor of the class in which we set the label (text) and the position of the button
 	 * @param label
      * @param x
      * @param y

@@ -6,7 +6,7 @@ public abstract class AbstractControler {
 
 	public Model model;
 
-	public abstract void toggleDoor();
+	public abstract void toggleDoor() throws InterruptedException;
 
 	public abstract void updateTemperature();
 
